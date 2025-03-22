@@ -2,6 +2,7 @@ package com.immfly.payments.domain.model;
 
 import java.util.Objects;
 
+
 public class Category {
     private final Long id;
     private final String name;

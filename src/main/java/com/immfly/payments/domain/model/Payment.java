@@ -11,21 +11,21 @@ public class Payment {
     private final String cardToken;
     private final String paymentGateway;
     private final Status status;
-    private final LocalDateTime paymentDate;
+    private final LocalDateTime timestamp;
 
-    public Payment(Long id, String cardToken, String paymentGateway, Status status, LocalDateTime paymentDate) {
+    public Payment(Long id, String cardToken, String paymentGateway, Status status, LocalDateTime timestamp) {
         this.id = id;
         this.cardToken = cardToken;
         this.paymentGateway = paymentGateway;
         this.status = status;
-        this.paymentDate = paymentDate;
+        this.timestamp = timestamp;
     }
 
     public Long id() { return id; }
     public String cardToken() { return cardToken; }
     public String paymentGateway() { return paymentGateway; }
     public Status status() { return status; }
-    public LocalDateTime paymentDate() { return paymentDate; }
+    public LocalDateTime timestamp() { return timestamp; }
 
 
     @Override
@@ -38,7 +38,7 @@ public class Payment {
         return Objects.equals(id, payment.id) &&
             Objects.equals(cardToken, payment.cardToken) &&
             Objects.equals(paymentGateway, payment.paymentGateway) &&
-            Objects.equals(paymentDate, payment.paymentDate) &&
+            Objects.equals(timestamp, payment.timestamp) &&
             status == payment.status;
     }
 
@@ -48,7 +48,7 @@ public class Payment {
         result = 31 * result + Objects.hashCode(cardToken);
         result = 31 * result + Objects.hashCode(paymentGateway);
         result = 31 * result + Objects.hashCode(status);
-        result = 31 * result + Objects.hashCode(paymentDate);
+        result = 31 * result + Objects.hashCode(timestamp);
         return result;
     }
 }

@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Order {
-    public enum Status { OPEN, DROPPED, FINISHED, CANCELED }
-
     private final Long id;
     private final List<Product> products = new ArrayList<>();
     private BigDecimal totalPrice;
@@ -16,7 +14,7 @@ public class Order {
     private final Integer seatNumber;
     private String buyerEmail;
     private Payment payment;
-    private Status status = Status.OPEN;
+    private OrderStatus status = OrderStatus.OPEN;
 
     public Order(Long id, String seatLetter, Integer seatNumber) {
         if (seatLetter == null || seatLetter.isBlank()) {
@@ -43,12 +41,12 @@ public class Order {
     }
 
     public void cancel() {
-        status = Status.CANCELED;
+        status = OrderStatus.CANCELED;
     }
 
     public void finishOrder(Payment payment) {
         this.payment = payment;
-        status = Status.FINISHED;
+        status = OrderStatus.FINISHED;
     }
 
     public Long id() { return id; }
@@ -58,7 +56,7 @@ public class Order {
     public Integer seatNumber() { return seatNumber; }
     public String buyerEmail() { return buyerEmail; }
     public Payment payment() { return payment; }
-    public Status status() { return status; }
+    public OrderStatus status() { return status; }
 
     @Override
     public boolean equals(Object o) {
