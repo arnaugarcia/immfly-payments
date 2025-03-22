@@ -10,7 +10,7 @@ import com.immfly.payments.domain.model.StockService;
 import com.immfly.payments.domain.repository.CategoryRepository;
 import com.immfly.payments.domain.repository.OrderRepository;
 import com.immfly.payments.domain.repository.ProductRepository;
-import com.immfly.payments.infrastructure.adapter.payment.PaymentGateway;
+import com.immfly.payments.infrastructure.adapter.payment.PaymentGatewayFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,14 +23,15 @@ public class InfrastructureConfig {
     }
 
     @Bean
-    public UpdateOrderUseCase updateOrderUseCase(OrderRepository orderRepository, ProductRepository productRepository,
+    public UpdateOrderUseCase updateOrderUseCase(OrderRepository orderRepository,
+                                                 ProductRepository productRepository,
                                                  StockService stockService) {
         return new UpdateOrderUseCase(orderRepository, productRepository, stockService);
     }
 
     @Bean
-    public FinishOrderUseCase finishOrderUseCase(OrderRepository orderRepository, PaymentGateway paymentGateway) {
-        return new FinishOrderUseCase(orderRepository, paymentGateway);
+    public FinishOrderUseCase finishOrderUseCase(OrderRepository orderRepository, PaymentGatewayFactory paymentGatewayFactory) {
+        return new FinishOrderUseCase(orderRepository, paymentGatewayFactory);
     }
 
     @Bean

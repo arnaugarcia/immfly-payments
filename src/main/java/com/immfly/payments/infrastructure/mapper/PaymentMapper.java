@@ -1,6 +1,7 @@
 package com.immfly.payments.infrastructure.mapper;
 
 import com.immfly.payments.domain.model.Payment;
+import com.immfly.payments.domain.model.PaymentGatewayType;
 import com.immfly.payments.infrastructure.entity.PaymentEntity;
 import com.immfly.payments.infrastructure.entity.PaymentStatusEntity;
 
@@ -14,7 +15,7 @@ public class PaymentMapper {
         PaymentEntity entity = new PaymentEntity();
         entity.setId(payment.id());
         entity.setCardToken(payment.cardToken());
-        entity.setGateway(payment.paymentGateway());
+        entity.setGateway(payment.paymentGateway().toString());
         entity.setStatus(PaymentStatusEntity.fromDomain(payment.status()));
         entity.setTimestamp(payment.timestamp());
         return entity;
@@ -25,7 +26,7 @@ public class PaymentMapper {
         return new Payment(
             entity.getId(),
             entity.getCardToken(),
-            entity.getGateway(),
+            PaymentGatewayType.fromString(entity.getGateway()),
             entity.getStatus().toDomain(),
             entity.getTimestamp()
         );

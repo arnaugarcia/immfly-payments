@@ -5,5 +5,5 @@ import com.immfly.payments.domain.model.PaymentStatus;
 import java.math.BigDecimal;
 
 public interface PaymentGateway {
-    Payment processPayment(String cardToken, String gatewayName, BigDecimal amount, PaymentStatus status);
+    Payment processPayment(String cardToken, BigDecimal amount);
 }

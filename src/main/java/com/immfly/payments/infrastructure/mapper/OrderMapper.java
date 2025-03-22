@@ -27,7 +27,7 @@ public class OrderMapper {
 
     public static Order toDomain(OrderEntity entity) {
         if (entity == null) return null;
-        Order order = new Order(entity.getId(), entity.getSeatLetter(), entity.getSeatNumber());
+        Order order = new Order(entity.getSeatLetter(), entity.getSeatNumber());
         Payment payment = order.payment();
         switch (entity.getStatus()) {
             case CANCELED -> order.cancel();

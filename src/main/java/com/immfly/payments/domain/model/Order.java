@@ -16,14 +16,14 @@ public class Order {
     private Payment payment;
     private OrderStatus status = OrderStatus.OPEN;
 
-    public Order(Long id, String seatLetter, Integer seatNumber) {
+    public Order(String seatLetter, Integer seatNumber) {
         if (seatLetter == null || seatLetter.isBlank()) {
             throw new DomainException("Seat letter is required");
         }
         if (seatNumber == null || seatNumber <= 0) {
             throw new DomainException("Seat number must be positive");
         }
-        this.id = id;
+        this.id = null;
         this.seatLetter = seatLetter;
         this.seatNumber = seatNumber;
         this.totalPrice = BigDecimal.ZERO;

@@ -11,7 +11,7 @@ public class CreateOrderUseCase {
     }
 
     public Order createOrder(String seatLetter, Integer seatNumber) {
-        Order order = new Order(null, seatLetter, seatNumber);
+        Order order = new Order(seatLetter, seatNumber);
         return orderRepository.save(order);
     }
 }

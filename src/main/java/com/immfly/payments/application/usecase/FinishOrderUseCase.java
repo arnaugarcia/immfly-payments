@@ -2,23 +2,25 @@ package com.immfly.payments.application.usecase;
 
 import com.immfly.payments.domain.model.Order;
 import com.immfly.payments.domain.model.Payment;
-import com.immfly.payments.domain.model.PaymentStatus;
+import com.immfly.payments.domain.model.PaymentGatewayType;
 import com.immfly.payments.domain.repository.OrderRepository;
 import com.immfly.payments.infrastructure.adapter.payment.PaymentGateway;
+import com.immfly.payments.infrastructure.adapter.payment.PaymentGatewayFactory;
 
 public class FinishOrderUseCase {
     private final OrderRepository orderRepository;
-    private final PaymentGateway paymentGateway;
+    private final PaymentGatewayFactory paymentGatewayFactory;
 
-    public FinishOrderUseCase(OrderRepository orderRepository, PaymentGateway paymentGateway) {
+    public FinishOrderUseCase(OrderRepository orderRepository, PaymentGatewayFactory paymentGatewayFactory) {
         this.orderRepository = orderRepository;
-        this.paymentGateway = paymentGateway;
+        this.paymentGatewayFactory = paymentGatewayFactory;
     }
 
-    public Order finishOrder(Long orderId, String cardToken, String gatewayName, PaymentStatus paymentStatus) {
+    public Order finishOrder(Long orderId, String cardToken, String gatewayName) {
         Order order = orderRepository.findById(orderId).orElseThrow();
-        // Process payment with the correct provider (could be polymorphic)
-        Payment payment = paymentGateway.processPayment(cardToken, gatewayName, order.totalPrice(), paymentStatus);
+        PaymentGatewayType type = PaymentGatewayType.fromString(gatewayName);
+        PaymentGateway gateway = paymentGatewayFactory.getGateway(type);
+        Payment payment = gateway.processPayment(cardToken, order.totalPrice());
         order.finishOrder(payment);
         return orderRepository.save(order);
     }

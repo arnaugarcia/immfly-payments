@@ -74,9 +74,8 @@ public class OrderController {
     @PostMapping("/{orderId}")
     public ResponseEntity<Order> finishOrder(@PathVariable Long orderId,
                                              @RequestParam String cardToken,
-                                             @RequestParam String gatewayName,
-                                             @RequestParam PaymentStatus paymentStatus) {
-        Order order = finishOrderUseCase.finishOrder(orderId, cardToken, gatewayName, paymentStatus);
+                                             @RequestParam String gatewayName) {
+        Order order = finishOrderUseCase.finishOrder(orderId, cardToken, gatewayName);
         return ResponseEntity.ok(order);
     }
 }

@@ -7,11 +7,11 @@ import java.util.Objects;
 public class Payment {
     private final Long id;
     private final String cardToken;
-    private final String paymentGateway;
+    private final PaymentGatewayType paymentGateway;
     private final PaymentStatus status;
     private final LocalDateTime timestamp;
 
-    public Payment(Long id, String cardToken, String paymentGateway, PaymentStatus status, LocalDateTime timestamp) {
+    public Payment(Long id, String cardToken, PaymentGatewayType paymentGateway, PaymentStatus status, LocalDateTime timestamp) {
         this.id = id;
         this.cardToken = cardToken;
         this.paymentGateway = paymentGateway;
@@ -27,7 +27,7 @@ public class Payment {
         return cardToken;
     }
 
-    public String paymentGateway() {
+    public PaymentGatewayType paymentGateway() {
         return paymentGateway;
     }
 
