@@ -1,5 +1,6 @@
 package com.immfly.payments.infrastructure.config;
 
+import com.immfly.payments.application.usecase.CancelOrderUseCase;
 import com.immfly.payments.application.usecase.CreateOrderUseCase;
 import com.immfly.payments.application.usecase.FinishOrderUseCase;
 import com.immfly.payments.application.usecase.GetAllCategoriesUseCase;
@@ -40,6 +41,11 @@ public class InfrastructureConfig {
     @Bean
     public GetAllProductsUseCase getAllProductsUseCase(ProductRepository productRepository) {
         return new GetAllProductsUseCase(productRepository);
+    }
+
+    @Bean
+    public CancelOrderUseCase cancelOrderUseCase(OrderRepository orderRepository) {
+        return new CancelOrderUseCase(orderRepository);
     }
 }
 

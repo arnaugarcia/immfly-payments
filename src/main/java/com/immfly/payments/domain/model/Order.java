@@ -34,6 +34,10 @@ public class Order {
         updateTotal();
     }
 
+    public void update(String buyerEmail) {
+        this.buyerEmail = buyerEmail;
+    }
+
     private void updateTotal() {
         totalPrice = products.stream()
             .map(Product::price)

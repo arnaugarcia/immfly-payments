@@ -83,18 +83,4 @@
     </createTable>
   </changeSet>
 
-  <changeSet id="5" author="immfly">
-    <createTable tableName="stock">
-      <column name="product_id" type="BIGINT">
-        <constraints primaryKey="true" nullable="false"/>
-      </column>
-      <column name="quantity" type="INT">
-        <constraints nullable="false"/>
-      </column>
-    </createTable>
-    <addForeignKeyConstraint
-      constraintName="fk_stock_product"
-      baseTableName="stock" baseColumnNames="product_id"
-      referencedTableName="products" referencedColumnNames="id"/>
-  </changeSet>
 </databaseChangeLog>

@@ -6,6 +6,8 @@ import com.immfly.payments.domain.model.Product;
 import com.immfly.payments.domain.model.StockService;
 import com.immfly.payments.domain.repository.OrderRepository;
 import com.immfly.payments.domain.repository.ProductRepository;
+import com.immfly.payments.infrastructure.dto.OrderDTO;
+import com.immfly.payments.infrastructure.dto.OrderRequestDTO;
 
 public class UpdateOrderUseCase {
     private final OrderRepository orderRepository;
@@ -18,7 +20,7 @@ public class UpdateOrderUseCase {
         this.stockService = stockService;
     }
 
-    public Order addProductToOrder(Long orderId, Long productId) {
+    public OrderDTO addProductToOrder(Long orderId, Long productId) {
         Order order = orderRepository.findById(orderId).orElseThrow();
         Product product = productRepository.findById(productId).orElseThrow();
 
@@ -26,6 +28,13 @@ public class UpdateOrderUseCase {
             throw new DomainException("Product " + product.name() + " is out of stock.");
         }
         order.addProduct(product);
-        return orderRepository.save(order);
+        Order result = orderRepository.save(order);
+        return OrderDTO.fromDomain(result);
+    }
+
+    public OrderDTO updateOrder(Long orderId, OrderRequestDTO orderDto) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        order.update(orderDto.buyerEmail());
+        return OrderDTO.fromDomain(order);
     }
 }
