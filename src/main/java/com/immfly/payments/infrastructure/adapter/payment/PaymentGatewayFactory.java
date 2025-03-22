@@ -24,7 +24,8 @@ public class PaymentGatewayFactory {
         gateways.put(PaymentGatewayType.MOCK, mockPaymentGateway);
     }
 
-    public PaymentGateway getGateway(PaymentGatewayType type) {
+    public PaymentGateway getGateway(String gateway) {
+        var type = PaymentGatewayType.fromString(gateway);
         if (!gateways.containsKey(type)) {
             throw new IllegalArgumentException("Unsupported payment gateway: " + type);
         }
