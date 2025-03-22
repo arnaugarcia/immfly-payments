@@ -6,20 +6,51 @@
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
   <changeSet id="100" author="immfly">
-    <!-- Dummy Category -->
-    <insert tableName="category">
+    <!-- Categories -->
+    <insert tableName="categories">
       <column name="id" valueNumeric="1"/>
       <column name="name" value="Electronics"/>
     </insert>
-    <!-- Dummy Product -->
-    <insert tableName="product">
+    <insert tableName="categories">
+      <column name="id" valueNumeric="2"/>
+      <column name="name" value="Books"/>
+    </insert>
+    <insert tableName="categories">
+      <column name="id" valueNumeric="3"/>
+      <column name="name" value="Clothing"/>
+    </insert>
+
+    <!-- Products -->
+    <insert tableName="products">
       <column name="id" valueNumeric="1"/>
       <column name="name" value="Smartphone"/>
       <column name="price" valueNumeric="599.99"/>
       <column name="category_id" valueNumeric="1"/>
       <column name="image" value="smartphone.png"/>
     </insert>
-    <!-- Dummy Order -->
+    <insert tableName="products">
+      <column name="id" valueNumeric="2"/>
+      <column name="name" value="Laptop"/>
+      <column name="price" valueNumeric="999.99"/>
+      <column name="category_id" valueNumeric="1"/>
+      <column name="image" value="laptop.png"/>
+    </insert>
+    <insert tableName="products">
+      <column name="id" valueNumeric="3"/>
+      <column name="name" value="Fiction Book"/>
+      <column name="price" valueNumeric="19.99"/>
+      <column name="category_id" valueNumeric="2"/>
+      <column name="image" value="book.png"/>
+    </insert>
+    <insert tableName="products">
+      <column name="id" valueNumeric="4"/>
+      <column name="name" value="T-Shirt"/>
+      <column name="price" valueNumeric="9.99"/>
+      <column name="category_id" valueNumeric="3"/>
+      <column name="image" value="tshirt.png"/>
+    </insert>
+
+    <!-- Orders -->
     <insert tableName="orders">
       <column name="id" valueNumeric="1"/>
       <column name="seat_letter" value="A"/>
@@ -27,18 +58,60 @@
       <column name="total_price" valueNumeric="599.99"/>
       <column name="status" value="OPEN"/>
     </insert>
-    <!-- Dummy Payment -->
-    <insert tableName="payment">
+    <insert tableName="orders">
+      <column name="id" valueNumeric="2"/>
+      <column name="seat_letter" value="B"/>
+      <column name="seat_number" valueNumeric="2"/>
+      <column name="total_price" valueNumeric="999.99"/>
+      <column name="status" value="FINISHED"/>
+    </insert>
+    <insert tableName="orders">
+      <column name="id" valueNumeric="3"/>
+      <column name="seat_letter" value="C"/>
+      <column name="seat_number" valueNumeric="3"/>
+      <column name="total_price" valueNumeric="29.98"/>
+      <column name="status" value="DROPPED"/>
+    </insert>
+
+    <!-- Payments -->
+    <insert tableName="payments">
       <column name="id" valueNumeric="1"/>
       <column name="card_token" value="token123"/>
-      <column name="payment_gateway" value="MockGateway"/>
+      <column name="gateway" value="MockGateway"/>
       <column name="status" value="PAID"/>
-      <column name="payment_date" valueDate="2025-03-22T12:00:00"/>
+      <column name="timestamp" valueDate="2025-03-22T12:00:00"/>
     </insert>
-    <!-- Dummy Stock -->
+    <insert tableName="payments">
+      <column name="id" valueNumeric="2"/>
+      <column name="card_token" value="token456"/>
+      <column name="gateway" value="MockGateway"/>
+      <column name="status" value="PAYMENT_FAILED"/>
+      <column name="timestamp" valueDate="2025-03-23T12:00:00"/>
+    </insert>
+    <insert tableName="payments">
+      <column name="id" valueNumeric="3"/>
+      <column name="card_token" value="token789"/>
+      <column name="gateway" value="MockGateway"/>
+      <column name="status" value="PAID"/>
+      <column name="timestamp" valueDate="2025-03-24T12:00:00"/>
+    </insert>
+
+    <!-- Stock -->
     <insert tableName="stock">
       <column name="product_id" valueNumeric="1"/>
       <column name="quantity" valueNumeric="100"/>
+    </insert>
+    <insert tableName="stock">
+      <column name="product_id" valueNumeric="2"/>
+      <column name="quantity" valueNumeric="50"/>
+    </insert>
+    <insert tableName="stock">
+      <column name="product_id" valueNumeric="3"/>
+      <column name="quantity" valueNumeric="200"/>
+    </insert>
+    <insert tableName="stock">
+      <column name="product_id" valueNumeric="4"/>
+      <column name="quantity" valueNumeric="150"/>
     </insert>
   </changeSet>
 </databaseChangeLog>

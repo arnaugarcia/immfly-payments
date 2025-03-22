@@ -6,57 +6,95 @@
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
   <changeSet id="1" author="immfly">
-    <createTable tableName="category">
+    <createTable tableName="categories">
       <column name="id" type="BIGINT" autoIncrement="true">
-        <constraints primaryKey="true"/>
+        <constraints primaryKey="true" nullable="false"/>
       </column>
-      <column name="name" type="VARCHAR(255)"/>
-      <column name="parent_id" type="BIGINT"/>
+      <column name="name" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="parent_id" type="BIGINT">
+        <constraints nullable="true"/>
+      </column>
     </createTable>
   </changeSet>
 
   <changeSet id="2" author="immfly">
-    <createTable tableName="product">
+    <createTable tableName="products">
       <column name="id" type="BIGINT" autoIncrement="true">
-        <constraints primaryKey="true"/>
+        <constraints primaryKey="true" nullable="false"/>
       </column>
-      <column name="name" type="VARCHAR(255)"/>
-      <column name="price" type="DECIMAL(10,2)"/>
-      <column name="category_id" type="BIGINT"/>
-      <column name="image" type="VARCHAR(512)"/>
+      <column name="name" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="price" type="DECIMAL(10,2)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="category_id" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="image" type="VARCHAR(512)">
+        <constraints nullable="true"/>
+      </column>
     </createTable>
+    <addForeignKeyConstraint
+      constraintName="fk_product_category"
+      baseTableName="products" baseColumnNames="category_id"
+      referencedTableName="categories" referencedColumnNames="id"/>
   </changeSet>
 
   <changeSet id="3" author="immfly">
     <createTable tableName="orders">
       <column name="id" type="BIGINT" autoIncrement="true">
-        <constraints primaryKey="true"/>
+        <constraints primaryKey="true" nullable="false"/>
       </column>
-      <column name="seat_letter" type="VARCHAR(10)"/>
-      <column name="seat_number" type="INT"/>
-      <column name="total_price" type="DECIMAL(10,2)"/>
-      <column name="status" type="VARCHAR(20)"/>
+      <column name="seat_letter" type="VARCHAR(10)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="seat_number" type="INT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="total_price" type="DECIMAL(10,2)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="status" type="VARCHAR(20)">
+        <constraints nullable="false"/>
+      </column>
     </createTable>
   </changeSet>
 
   <changeSet id="4" author="immfly">
-    <createTable tableName="payment">
+    <createTable tableName="payments">
       <column name="id" type="BIGINT" autoIncrement="true">
-        <constraints primaryKey="true"/>
+        <constraints primaryKey="true" nullable="false"/>
       </column>
-      <column name="card_token" type="VARCHAR(255)"/>
-      <column name="payment_gateway" type="VARCHAR(255)"/>
-      <column name="status" type="VARCHAR(20)"/>
-      <column name="payment_date" type="TIMESTAMP"/>
+      <column name="card_token" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="gateway" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="status" type="VARCHAR(20)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="timestamp" type="TIMESTAMP">
+        <constraints nullable="false"/>
+      </column>
     </createTable>
   </changeSet>
 
   <changeSet id="5" author="immfly">
     <createTable tableName="stock">
       <column name="product_id" type="BIGINT">
-        <constraints primaryKey="true"/>
+        <constraints primaryKey="true" nullable="false"/>
       </column>
-      <column name="quantity" type="INT"/>
+      <column name="quantity" type="INT">
+        <constraints nullable="false"/>
+      </column>
     </createTable>
+    <addForeignKeyConstraint
+      constraintName="fk_stock_product"
+      baseTableName="stock" baseColumnNames="product_id"
+      referencedTableName="products" referencedColumnNames="id"/>
   </changeSet>
 </databaseChangeLog>
