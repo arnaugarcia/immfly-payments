@@ -32,8 +32,8 @@ public class OrderController {
     private final FinishOrderUseCase finishOrderUseCase;
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestParam String seatLetter, @RequestParam Integer seatNumber) {
-        Order order = createOrderUseCase.createOrder(seatLetter, seatNumber);
+    public ResponseEntity<OrderDTO> createOrder(@RequestParam String seatLetter, @RequestParam Integer seatNumber) {
+        OrderDTO order = createOrderUseCase.createOrder(seatLetter, seatNumber);
         return ResponseEntity.ok(order);
     }
 
@@ -72,10 +72,10 @@ public class OrderController {
         @ApiResponse(responseCode = "404", description = "Order not found")
     })
     @PostMapping("/{orderId}")
-    public ResponseEntity<Order> finishOrder(@PathVariable Long orderId,
+    public ResponseEntity<OrderDTO> finishOrder(@PathVariable Long orderId,
                                              @RequestParam String cardToken,
                                              @RequestParam String gatewayName) {
-        Order order = finishOrderUseCase.finishOrder(orderId, cardToken, gatewayName);
+        OrderDTO order = finishOrderUseCase.finishOrder(orderId, cardToken, gatewayName);
         return ResponseEntity.ok(order);
     }
 }

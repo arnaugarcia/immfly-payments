@@ -1,10 +1,8 @@
 package com.immfly.payments.application.usecase;
 
-import com.immfly.payments.domain.model.Order;
-import com.immfly.payments.domain.model.Payment;
 import com.immfly.payments.domain.repository.OrderRepository;
-import com.immfly.payments.infrastructure.adapter.payment.PaymentGateway;
 import com.immfly.payments.infrastructure.adapter.payment.PaymentGatewayFactory;
+import com.immfly.payments.infrastructure.dto.OrderDTO;
 
 public class FinishOrderUseCase {
     private final OrderRepository orderRepository;
@@ -15,11 +13,12 @@ public class FinishOrderUseCase {
         this.paymentGatewayFactory = paymentGatewayFactory;
     }
 
-    public Order finishOrder(Long orderId, String cardToken, String gatewayName) {
-        Order order = orderRepository.findById(orderId).orElseThrow();
-        PaymentGateway gateway = paymentGatewayFactory.getGateway(gatewayName);
-        Payment payment = gateway.processPayment(cardToken, order.totalPrice());
+    public OrderDTO finishOrder(Long orderId, String cardToken, String gatewayName) {
+        var order = orderRepository.findById(orderId).orElseThrow();
+        var gateway = paymentGatewayFactory.getGateway(gatewayName);
+        var payment = gateway.processPayment(cardToken, order.totalPrice());
         order.finishOrder(payment);
-        return orderRepository.save(order);
+        var result = orderRepository.save(order);
+        return OrderDTO.fromDomain(result);
     }
 }
