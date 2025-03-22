@@ -1,8 +1,6 @@
 package com.immfly.payments.infrastructure.adapter.rest;
 
 import com.immfly.payments.application.usecase.GetAllCategoriesUseCase;
-import com.immfly.payments.domain.model.Category;
-import com.immfly.payments.domain.repository.CategoryRepository;
 import com.immfly.payments.infrastructure.dto.CategoryDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/categories")
+@RequestMapping("/api/categories")
 @Tag(name = "Category", description = "Category management APIs")
 public class CategoryController {
 

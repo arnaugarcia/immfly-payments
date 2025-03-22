@@ -20,7 +20,7 @@ public class PaymentEntity {
     private Long id;
 
     private String cardToken;
-    private String paymentGateway;
+    private String gateway;
 
     @Enumerated(EnumType.STRING)
     private PaymentStatusEntity status;

@@ -14,8 +14,7 @@ public class PaymentMapper {
         PaymentEntity entity = new PaymentEntity();
         entity.setId(payment.id());
         entity.setCardToken(payment.cardToken());
-        entity.setPaymentGateway(payment.paymentGateway());
-        // Use conversion method from domain to persistence enum
+        entity.setGateway(payment.paymentGateway());
         entity.setStatus(PaymentStatusEntity.fromDomain(payment.status()));
         entity.setTimestamp(payment.timestamp());
         return entity;
@@ -26,7 +25,7 @@ public class PaymentMapper {
         return new Payment(
             entity.getId(),
             entity.getCardToken(),
-            entity.getPaymentGateway(),
+            entity.getGateway(),
             entity.getStatus().toDomain(),
             entity.getTimestamp()
         );

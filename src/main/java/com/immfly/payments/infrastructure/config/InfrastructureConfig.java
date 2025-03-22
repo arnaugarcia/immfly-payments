@@ -3,6 +3,7 @@ package com.immfly.payments.infrastructure.config;
 import com.immfly.payments.application.usecase.CreateOrderUseCase;
 import com.immfly.payments.application.usecase.FinishOrderUseCase;
 import com.immfly.payments.application.usecase.GetAllCategoriesUseCase;
+import com.immfly.payments.application.usecase.GetAllProductsUseCase;
 import com.immfly.payments.application.usecase.UpdateOrderUseCase;
 import com.immfly.payments.domain.model.StockService;
 import com.immfly.payments.domain.repository.CategoryRepository;
@@ -34,6 +35,11 @@ public class InfrastructureConfig {
     @Bean
     public GetAllCategoriesUseCase getAllCategoriesUseCase(CategoryRepository categoryRepository) {
         return new GetAllCategoriesUseCase(categoryRepository);
+    }
+
+    @Bean
+    public GetAllProductsUseCase getAllProductsUseCase(ProductRepository productRepository) {
+        return new GetAllProductsUseCase(productRepository);
     }
 }
 

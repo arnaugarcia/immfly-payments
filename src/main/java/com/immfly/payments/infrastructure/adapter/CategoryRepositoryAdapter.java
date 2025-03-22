@@ -7,7 +7,6 @@ import com.immfly.payments.infrastructure.mapper.CategoryMapper;
 import com.immfly.payments.infrastructure.repository.SpringCategoryRepository;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -24,7 +23,7 @@ public class CategoryRepositoryAdapter implements CategoryRepository {
         List<CategoryEntity> entities = springCategoryRepository.findAll();
         return entities.stream()
             .map(CategoryMapper::toDomain)
-            .collect(Collectors.toList());
+            .toList();
     }
 
     @Override

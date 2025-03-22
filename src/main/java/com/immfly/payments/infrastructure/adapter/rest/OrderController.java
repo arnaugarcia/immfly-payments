@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/orders")
+@RequestMapping("/api/orders")
 public class OrderController {
 
     private final CreateOrderUseCase createOrderUseCase;

@@ -2,11 +2,8 @@ package com.immfly.payments.infrastructure.mapper;
 
 import com.immfly.payments.domain.model.Order;
 import com.immfly.payments.domain.model.Payment;
-import com.immfly.payments.domain.model.Product;
 import com.immfly.payments.infrastructure.entity.OrderEntity;
 import com.immfly.payments.infrastructure.entity.OrderStatusEntity;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class OrderMapper {
 
@@ -23,7 +20,7 @@ public class OrderMapper {
         if (order.products() != null) {
             entity.setProducts(order.products().stream()
                 .map(ProductMapper::toEntity)
-                .collect(Collectors.toList()));
+                .toList());
         }
         return entity;
     }
