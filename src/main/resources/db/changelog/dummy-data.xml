@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet id="100" author="immfly">
+    <!-- Dummy Category -->
+    <insert tableName="category">
+      <column name="id" valueNumeric="1"/>
+      <column name="name" value="Electronics"/>
+    </insert>
+    <!-- Dummy Product -->
+    <insert tableName="product">
+      <column name="id" valueNumeric="1"/>
+      <column name="name" value="Smartphone"/>
+      <column name="price" valueNumeric="599.99"/>
+      <column name="category_id" valueNumeric="1"/>
+      <column name="image" value="smartphone.png"/>
+    </insert>
+    <!-- Dummy Order -->
+    <insert tableName="orders">
+      <column name="id" valueNumeric="1"/>
+      <column name="seat_letter" value="A"/>
+      <column name="seat_number" valueNumeric="1"/>
+      <column name="total_price" valueNumeric="599.99"/>
+      <column name="status" value="OPEN"/>
+    </insert>
+    <!-- Dummy Payment -->
+    <insert tableName="payment">
+      <column name="id" valueNumeric="1"/>
+      <column name="card_token" value="token123"/>
+      <column name="payment_gateway" value="MockGateway"/>
+      <column name="status" value="PAID"/>
+      <column name="payment_date" valueDate="2025-03-22T12:00:00"/>
+    </insert>
+    <!-- Dummy Stock -->
+    <insert tableName="stock">
+      <column name="product_id" valueNumeric="1"/>
+      <column name="quantity" valueNumeric="100"/>
+    </insert>
+  </changeSet>
+</databaseChangeLog>

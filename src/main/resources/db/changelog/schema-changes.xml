@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet id="1" author="immfly">
+    <createTable tableName="category">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="name" type="VARCHAR(255)"/>
+      <column name="parent_id" type="BIGINT"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="2" author="immfly">
+    <createTable tableName="product">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="name" type="VARCHAR(255)"/>
+      <column name="price" type="DECIMAL(10,2)"/>
+      <column name="category_id" type="BIGINT"/>
+      <column name="image" type="VARCHAR(512)"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="3" author="immfly">
+    <createTable tableName="orders">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="seat_letter" type="VARCHAR(10)"/>
+      <column name="seat_number" type="INT"/>
+      <column name="total_price" type="DECIMAL(10,2)"/>
+      <column name="status" type="VARCHAR(20)"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="4" author="immfly">
+    <createTable tableName="payment">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="card_token" type="VARCHAR(255)"/>
+      <column name="payment_gateway" type="VARCHAR(255)"/>
+      <column name="status" type="VARCHAR(20)"/>
+      <column name="payment_date" type="TIMESTAMP"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="5" author="immfly">
+    <createTable tableName="stock">
+      <column name="product_id" type="BIGINT">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="quantity" type="INT"/>
+    </createTable>
+  </changeSet>
+</databaseChangeLog>
