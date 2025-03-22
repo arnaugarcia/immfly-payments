@@ -5,6 +5,8 @@ import com.immfly.payments.infrastructure.entity.CategoryEntity;
 
 public class CategoryMapper {
 
+    private CategoryMapper() {}
+
     public static CategoryEntity toEntity(Category category) {
         if (category == null) {
             return null;

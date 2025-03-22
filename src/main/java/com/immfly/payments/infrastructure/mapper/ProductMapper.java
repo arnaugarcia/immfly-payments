@@ -5,6 +5,8 @@ import com.immfly.payments.infrastructure.entity.ProductEntity;
 
 public class ProductMapper {
 
+    private ProductMapper() {}
+
     public static ProductEntity toEntity(Product product) {
         if (product == null) return null;
         ProductEntity entity = new ProductEntity();

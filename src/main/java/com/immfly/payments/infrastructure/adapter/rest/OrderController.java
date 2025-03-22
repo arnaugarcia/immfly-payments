@@ -5,6 +5,7 @@ import com.immfly.payments.application.usecase.FinishOrderUseCase;
 import com.immfly.payments.application.usecase.UpdateOrderUseCase;
 import com.immfly.payments.domain.model.Order;
 import com.immfly.payments.domain.model.Payment;
+import com.immfly.payments.domain.model.PaymentStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +40,7 @@ public class OrderController {
     public ResponseEntity<Order> finishOrder(@PathVariable Long orderId,
                                              @RequestParam String cardToken,
                                              @RequestParam String gatewayName,
-                                             @RequestParam Payment.Status paymentStatus) {
+                                             @RequestParam PaymentStatus paymentStatus) {
         Order order = finishOrderUseCase.finishOrder(orderId, cardToken, gatewayName, paymentStatus);
         return ResponseEntity.ok(order);
     }

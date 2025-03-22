@@ -49,6 +49,12 @@ public class Order {
         status = OrderStatus.FINISHED;
     }
 
+    public void dropped() {
+        status = OrderStatus.DROPPED;
+    }
+
+
+
     public Long id() { return id; }
     public List<Product> products() { return products; }
     public BigDecimal totalPrice() { return totalPrice; }

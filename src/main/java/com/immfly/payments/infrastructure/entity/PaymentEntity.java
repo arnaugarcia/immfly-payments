@@ -1,6 +1,8 @@
 package com.immfly.payments.infrastructure.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,7 +22,8 @@ public class PaymentEntity {
     private String cardToken;
     private String paymentGateway;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatusEntity status;
 
     private LocalDateTime timestamp;
 }

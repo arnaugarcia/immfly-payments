@@ -2,10 +2,12 @@ package com.immfly.payments.infrastructure.mapper;
 
 import com.immfly.payments.domain.model.Payment;
 import com.immfly.payments.infrastructure.entity.PaymentEntity;
+import com.immfly.payments.infrastructure.entity.PaymentStatusEntity;
 
 public class PaymentMapper {
 
-    private PaymentMapper() {}
+    private PaymentMapper() {
+    }
 
     public static PaymentEntity toEntity(Payment payment) {
         if (payment == null) return null;
@@ -13,7 +15,8 @@ public class PaymentMapper {
         entity.setId(payment.id());
         entity.setCardToken(payment.cardToken());
         entity.setPaymentGateway(payment.paymentGateway());
-        entity.setStatus(payment.status());
+        // Use conversion method from domain to persistence enum
+        entity.setStatus(PaymentStatusEntity.fromDomain(payment.status()));
         entity.setTimestamp(payment.timestamp());
         return entity;
     }
@@ -24,7 +27,7 @@ public class PaymentMapper {
             entity.getId(),
             entity.getCardToken(),
             entity.getPaymentGateway(),
-            entity.getStatus(),
+            entity.getStatus().toDomain(),
             entity.getTimestamp()
         );
     }

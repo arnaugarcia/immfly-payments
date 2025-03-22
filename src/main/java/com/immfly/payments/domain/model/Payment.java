@@ -5,15 +5,13 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Payment {
-    public enum Status { PAID, PAYMENT_FAILED, OFFLINE_PAYMENT }
-
     private final Long id;
     private final String cardToken;
     private final String paymentGateway;
-    private final Status status;
+    private final PaymentStatus status;
     private final LocalDateTime timestamp;
 
-    public Payment(Long id, String cardToken, String paymentGateway, Status status, LocalDateTime timestamp) {
+    public Payment(Long id, String cardToken, String paymentGateway, PaymentStatus status, LocalDateTime timestamp) {
         this.id = id;
         this.cardToken = cardToken;
         this.paymentGateway = paymentGateway;
@@ -21,11 +19,25 @@ public class Payment {
         this.timestamp = timestamp;
     }
 
-    public Long id() { return id; }
-    public String cardToken() { return cardToken; }
-    public String paymentGateway() { return paymentGateway; }
-    public Status status() { return status; }
-    public LocalDateTime timestamp() { return timestamp; }
+    public Long id() {
+        return id;
+    }
+
+    public String cardToken() {
+        return cardToken;
+    }
+
+    public String paymentGateway() {
+        return paymentGateway;
+    }
+
+    public PaymentStatus status() {
+        return status;
+    }
+
+    public LocalDateTime timestamp() {
+        return timestamp;
+    }
 
 
     @Override
