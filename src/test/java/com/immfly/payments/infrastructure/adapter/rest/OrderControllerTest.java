@@ -157,7 +157,7 @@ class OrderControllerTest {
         void shouldReturnConflictWhenProductDoesntHaveStock() throws Exception {
             when(mockStockService.hasStock(product.getId())).thenReturn(false);
             mockMvc.perform(put(API_ORDERS + "/" + order.getId() + "/products/" + product.getId()))
-                .andExpect(status().isConflict());
+                .andExpect(status().isBadRequest());
         }
     }
 
@@ -217,7 +217,16 @@ class OrderControllerTest {
         @Test
         @WithMockUser
         void shouldReturn404WhenOrderNotFound() throws Exception {
-            mockMvc.perform(put(API_ORDERS + "/" + getRandomId())).andExpect(status().isNotFound());
+            mockMvc.perform(put(API_ORDERS + "/" + getRandomId())
+                    .contentType("application/json")
+                    .content(
+                        """
+                        {
+                            "buyerEmail": "newemail@buyer.com"
+                        }
+                        """
+                    ))
+                .andExpect(status().isNotFound());
         }
 
         @Test

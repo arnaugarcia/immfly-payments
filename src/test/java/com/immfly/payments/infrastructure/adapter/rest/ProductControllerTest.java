@@ -43,25 +43,30 @@ class ProductControllerTest {
     @Autowired
     private SpringCategoryRepository springCategoryRepository;
 
+    @Autowired
+    private SpringOrderRepository springOrderRepository;
+
     private final String PRODUCT_NAME = "Product 1";
     private final BigDecimal PRODUCT_PRICE = new BigDecimal("10.0");
     private final String PRODUCT_IMAGE = "image1.jpg";
 
     @BeforeEach
     void setUp() {
+        springOrderRepository.deleteAll();
         springProductRepository.deleteAll();
         springCategoryRepository.deleteAll();
+
+        CategoryEntity category = new CategoryEntity();
+        category.setName("Category 1");
+        category = springCategoryRepository.save(category);
 
         ProductEntity product = new ProductEntity();
         product.setName(PRODUCT_NAME);
         product.setPrice(PRODUCT_PRICE);
         product.setImage(PRODUCT_IMAGE);
 
-        CategoryEntity category = new CategoryEntity();
-        category.setName("Category 1");
-        springCategoryRepository.save(category);
-
         product.setCategory(category);
+
         springProductRepository.save(product);
     }
 
