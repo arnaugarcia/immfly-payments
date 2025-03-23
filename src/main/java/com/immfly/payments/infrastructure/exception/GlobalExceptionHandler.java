@@ -1,6 +1,7 @@
 package com.immfly.payments.infrastructure.exception;
 
 import com.immfly.payments.domain.exception.DomainException;
+import com.immfly.payments.infrastructure.adapter.payment.InvalidPaymentGatewayException;
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 import org.springframework.http.HttpStatus;
@@ -23,9 +24,9 @@ class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(Exception ex) {
+    @ExceptionHandler(InvalidPaymentGatewayException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidPaymentGatewayException(InvalidPaymentGatewayException ex) {
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), LocalDateTime.now());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 }

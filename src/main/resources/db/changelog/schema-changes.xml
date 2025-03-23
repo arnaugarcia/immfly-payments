@@ -54,6 +54,7 @@
       <column name="seat_number" type="INT">
         <constraints nullable="false"/>
       </column>
+      <column name="buyer_email" type="VARCHAR(255)"/>
       <column name="total_price" type="DECIMAL(10,2)">
         <constraints nullable="false"/>
       </column>
@@ -81,6 +82,31 @@
         <constraints nullable="false"/>
       </column>
     </createTable>
+  </changeSet>
+
+  <changeSet id="create-order-products" author="chatgpt">
+    <createTable tableName="order_products">
+      <column name="order_id" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="product_id" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <addForeignKeyConstraint
+      baseTableName="order_products"
+      baseColumnNames="order_id"
+      constraintName="fk_order_products_order"
+      referencedTableName="orders"
+      referencedColumnNames="id"/>
+
+    <addForeignKeyConstraint
+      baseTableName="order_products"
+      baseColumnNames="product_id"
+      constraintName="fk_order_products_product"
+      referencedTableName="products"
+      referencedColumnNames="id"/>
   </changeSet>
 
 </databaseChangeLog>

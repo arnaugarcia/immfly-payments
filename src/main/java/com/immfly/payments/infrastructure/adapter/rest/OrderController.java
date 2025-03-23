@@ -4,8 +4,6 @@ import com.immfly.payments.application.usecase.CancelOrderUseCase;
 import com.immfly.payments.application.usecase.CreateOrderUseCase;
 import com.immfly.payments.application.usecase.FinishOrderUseCase;
 import com.immfly.payments.application.usecase.UpdateOrderUseCase;
-import com.immfly.payments.domain.model.Order;
-import com.immfly.payments.domain.model.PaymentStatus;
 import com.immfly.payments.infrastructure.dto.OrderDTO;
 import com.immfly.payments.infrastructure.dto.OrderRequestDTO;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -74,8 +72,8 @@ public class OrderController {
     @PostMapping("/{orderId}")
     public ResponseEntity<OrderDTO> finishOrder(@PathVariable Long orderId,
                                              @RequestParam String cardToken,
-                                             @RequestParam String gatewayName) {
-        OrderDTO order = finishOrderUseCase.finishOrder(orderId, cardToken, gatewayName);
+                                             @RequestParam String gateway) {
+        OrderDTO order = finishOrderUseCase.finishOrder(orderId, cardToken, gateway);
         return ResponseEntity.ok(order);
     }
 }

@@ -27,6 +27,7 @@ public class OrderEntity {
     private String seatLetter;
     private Integer seatNumber;
     private BigDecimal totalPrice;
+    private String buyerEmail;
 
     @Enumerated(EnumType.STRING)
     private OrderStatusEntity status;

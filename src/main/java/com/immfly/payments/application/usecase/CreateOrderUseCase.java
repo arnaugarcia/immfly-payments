@@ -12,7 +12,7 @@ public class CreateOrderUseCase {
     }
 
     public OrderDTO createOrder(String seatLetter, Integer seatNumber) {
-        Order order = new Order(seatLetter, seatNumber);
+        Order order = Order.create(seatLetter, seatNumber);
         Order result = orderRepository.save(order);
         return OrderDTO.fromDomain(result);
     }

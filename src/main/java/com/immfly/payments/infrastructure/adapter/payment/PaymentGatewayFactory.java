@@ -1,5 +1,6 @@
 package com.immfly.payments.infrastructure.adapter.payment;
 
+import com.immfly.payments.domain.exception.DomainException;
 import com.immfly.payments.domain.model.PaymentGatewayType;
 import jakarta.annotation.PostConstruct;
 import java.util.EnumMap;
@@ -25,10 +26,14 @@ public class PaymentGatewayFactory {
     }
 
     public PaymentGateway getGateway(String gateway) {
-        var type = PaymentGatewayType.fromString(gateway);
-        if (!gateways.containsKey(type)) {
-            throw new IllegalArgumentException("Unsupported payment gateway: " + type);
+        try {
+            var type = PaymentGatewayType.fromString(gateway.toUpperCase());
+            if (!gateways.containsKey(type)) {
+                throw new IllegalArgumentException("Unsupported payment gateway: " + type);
+            }
+            return gateways.get(type);
+        } catch (Exception e) {
+            throw new InvalidPaymentGatewayException();
         }
-        return gateways.get(type);
     }
 }

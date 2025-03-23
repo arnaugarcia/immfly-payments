@@ -24,7 +24,7 @@ public class UpdateOrderUseCase {
         Order order = orderRepository.findById(orderId).orElseThrow();
         Product product = productRepository.findById(productId).orElseThrow();
 
-        if (!stockService.isProductInStock(product)) {
+        if (!stockService.hasStock(product.id())) {
             throw new DomainException("Product " + product.name() + " is out of stock.");
         }
         order.addProduct(product);
@@ -35,6 +35,7 @@ public class UpdateOrderUseCase {
     public OrderDTO updateOrder(Long orderId, OrderRequestDTO orderDto) {
         Order order = orderRepository.findById(orderId).orElseThrow();
         order.update(orderDto.buyerEmail());
-        return OrderDTO.fromDomain(order);
+        Order result = orderRepository.save(order);
+        return OrderDTO.fromDomain(result);
     }
 }

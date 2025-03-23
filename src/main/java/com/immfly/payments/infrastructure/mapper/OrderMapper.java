@@ -16,6 +16,7 @@ public class OrderMapper {
         entity.setSeatLetter(order.seatLetter());
         entity.setSeatNumber(order.seatNumber());
         entity.setTotalPrice(order.totalPrice());
+        entity.setBuyerEmail(order.buyerEmail());
         entity.setStatus(OrderStatusEntity.fromDomain(order.status()));
         if (order.products() != null) {
             entity.setProducts(order.products().stream()
@@ -27,7 +28,8 @@ public class OrderMapper {
 
     public static Order toDomain(OrderEntity entity) {
         if (entity == null) return null;
-        Order order = new Order(entity.getSeatLetter(), entity.getSeatNumber());
+        Order order = new Order(entity.getId(), entity.getSeatLetter(), entity.getSeatNumber());
+        order.update(entity.getBuyerEmail());
         Payment payment = order.payment();
         switch (entity.getStatus()) {
             case CANCELED -> order.cancel();

@@ -4,7 +4,7 @@ import com.immfly.payments.domain.exception.DomainException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Random;
 
 public class Order {
     private final Long id;
@@ -16,17 +16,21 @@ public class Order {
     private Payment payment;
     private OrderStatus status = OrderStatus.OPEN;
 
-    public Order(String seatLetter, Integer seatNumber) {
+    public Order(Long id, String seatLetter, Integer seatNumber) {
         if (seatLetter == null || seatLetter.isBlank()) {
             throw new DomainException("Seat letter is required");
         }
         if (seatNumber == null || seatNumber <= 0) {
             throw new DomainException("Seat number must be positive");
         }
-        this.id = null;
+        this.id = id;
         this.seatLetter = seatLetter;
         this.seatNumber = seatNumber;
         this.totalPrice = BigDecimal.ZERO;
+    }
+
+    public static Order create(String seatLetter, Integer seatNumber) {
+        return new Order(null, seatLetter, seatNumber);
     }
 
     public void addProduct(Product product) {
@@ -57,8 +61,6 @@ public class Order {
         status = OrderStatus.DROPPED;
     }
 
-
-
     public Long id() { return id; }
     public List<Product> products() { return products; }
     public BigDecimal totalPrice() { return totalPrice; }
@@ -67,34 +69,4 @@ public class Order {
     public String buyerEmail() { return buyerEmail; }
     public Payment payment() { return payment; }
     public OrderStatus status() { return status; }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Order order = (Order) o;
-        return Objects.equals(id, order.id) &&
-            Objects.equals(products, order.products) &&
-            Objects.equals(totalPrice, order.totalPrice) &&
-            Objects.equals(seatLetter, order.seatLetter) &&
-            Objects.equals(seatNumber, order.seatNumber) &&
-            Objects.equals(buyerEmail, order.buyerEmail) &&
-            Objects.equals(payment, order.payment) &&
-            status == order.status;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hashCode(id);
-        result = 31 * result + Objects.hashCode(products);
-        result = 31 * result + Objects.hashCode(totalPrice);
-        result = 31 * result + Objects.hashCode(seatLetter);
-        result = 31 * result + Objects.hashCode(seatNumber);
-        result = 31 * result + Objects.hashCode(buyerEmail);
-        result = 31 * result + Objects.hashCode(payment);
-        result = 31 * result + Objects.hashCode(status);
-        return result;
-    }
 }

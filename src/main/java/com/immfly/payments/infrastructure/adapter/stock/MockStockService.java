@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class MockStockService implements StockService {
 
     @Override
-    public boolean isProductInStock(Product product) {
+    public boolean hasStock(Long productId) {
         // Mock implementation, I'm not going to implement a real stock service for this example
         return true;
     }
