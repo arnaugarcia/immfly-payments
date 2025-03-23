@@ -4,7 +4,6 @@ import com.immfly.payments.domain.model.Category;
 import com.immfly.payments.domain.repository.CategoryRepository;
 import com.immfly.payments.infrastructure.dto.CategoryDTO;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GetAllCategoriesUseCase {
 
@@ -18,7 +17,7 @@ public class GetAllCategoriesUseCase {
         List<Category> categories = categoryRepository.findAll();
         return categories.stream()
             .map(this::mapToDTO)
-            .collect(Collectors.toList());
+            .toList();
     }
 
     private CategoryDTO mapToDTO(Category category) {

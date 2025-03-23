@@ -18,12 +18,6 @@ public class PaymentRepositoryAdapter implements PaymentRepository {
     }
 
     @Override
-    public Payment findById(Long id) {
-        Optional<PaymentEntity> entity = springPaymentRepository.findById(id);
-        return entity.map(PaymentMapper::toDomain).orElse(null);
-    }
-
-    @Override
     public Payment save(Payment payment) {
         PaymentEntity entity = PaymentMapper.toEntity(payment);
         PaymentEntity saved = springPaymentRepository.save(entity);

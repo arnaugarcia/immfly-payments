@@ -25,17 +25,4 @@ public class CategoryRepositoryAdapter implements CategoryRepository {
             .map(CategoryMapper::toDomain)
             .toList();
     }
-
-    @Override
-    public Category save(Category category) {
-        CategoryEntity entity = CategoryMapper.toEntity(category);
-        CategoryEntity saved = springCategoryRepository.save(entity);
-        return CategoryMapper.toDomain(saved);
-    }
-
-    @Override
-    public Optional<Category> findById(Long id) {
-        return springCategoryRepository.findById(id)
-            .map(CategoryMapper::toDomain);
-    }
 }
