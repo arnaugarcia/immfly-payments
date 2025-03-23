@@ -2,6 +2,7 @@ package com.immfly.payments.domain.model;
 
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Payment {
     private final Long id;
@@ -15,6 +16,7 @@ public class Payment {
                    PaymentGatewayType paymentGateway,
                    PaymentStatus status,
                    LocalDateTime timestamp) {
+        Objects.requireNonNull(id, "id must not be null");
         this.id = id;
         this.cardToken = cardToken;
         this.paymentGateway = paymentGateway;

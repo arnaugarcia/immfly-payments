@@ -1,5 +1,6 @@
 package com.immfly.payments.infrastructure.dto;
 
+import com.immfly.payments.domain.model.Category;
 import com.immfly.payments.domain.model.Product;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
@@ -13,7 +14,8 @@ public record ProductDTO(
     @Schema(description = "Image URL of the product", example = "http://example.com/image.jpg") String image) {
 
     public static ProductDTO fromDomain(Product product) {
-        return new ProductDTO(product.id(), product.name(), product.price(), product.category().name(), product.image());
+        Category category = product.category();
+        return new ProductDTO(product.id(), product.name(), product.price(), category != null ? category.name() : null, product.image());
     }
 }
 

@@ -1,7 +1,6 @@
 package com.immfly.payments.domain.model;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public class Product {
     private Long id;
@@ -32,26 +31,4 @@ public class Product {
 
     public String image() { return image; }
     public void image(String image) { this.image = image; }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(name, product.name)
-            && Objects.equals(price, product.price) && Objects.equals(category, product.category)
-            && Objects.equals(image, product.image);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hashCode(id);
-        result = 31 * result + Objects.hashCode(name);
-        result = 31 * result + Objects.hashCode(price);
-        result = 31 * result + Objects.hashCode(category);
-        result = 31 * result + Objects.hashCode(image);
-        return result;
-    }
 }

@@ -14,7 +14,9 @@ public class UpdateOrderUseCase {
     private final ProductRepository productRepository;
     private final StockService stockService;
 
-    public UpdateOrderUseCase(OrderRepository orderRepository, ProductRepository productRepository, StockService stockService) {
+    public UpdateOrderUseCase(OrderRepository orderRepository,
+                              ProductRepository productRepository,
+                              StockService stockService) {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
         this.stockService = stockService;
