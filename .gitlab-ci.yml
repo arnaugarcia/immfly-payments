@@ -1,0 +1,30 @@
+stages:
+  - build
+  - test
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository
+
+build:
+  stage: build
+  image: maven:3.8.5-openjdk-17
+  script:
+    - mvn clean compile
+
+test:
+  stage: test
+  image: maven:3.8.5-openjdk-17
+  services:
+    - postgres:13
+  variables:
+    POSTGRES_DB: testdb
+    POSTGRES_USER: testuser
+    POSTGRES_PASSWORD: testpass
+  before_script:
+    - apt-get update && apt-get install -y curl
+  script:
+    - mvn test
